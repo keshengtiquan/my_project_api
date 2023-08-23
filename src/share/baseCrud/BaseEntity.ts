@@ -2,11 +2,17 @@ import { Transform, TransformFnParams } from 'class-transformer'
 import {  Column, CreateDateColumn, Generated, UpdateDateColumn } from 'typeorm'
 
 export abstract class BaseEntity  {
+  @Column()
+  @Generated('uuid')
+  id: string;
+
+  @Column({type: 'char', length:1, default: '0', comment: "删除标志（0代表存在 1代表删除）"})
+  del_flag: string
 
   @Column({ comment: '创建者', default: null })
   create_by: string
 
-  @Transform((row: TransformFnParams) => +new Date(row.value))
+ 
   @CreateDateColumn({
     type: 'timestamp',
     nullable: false,
@@ -18,7 +24,6 @@ export abstract class BaseEntity  {
   @Column({ comment: '更新者', default: null })
   update_by: string
 
-  @Transform((row: TransformFnParams) => +new Date(row.value))
   @UpdateDateColumn({
     type: 'timestamp',
     nullable: false,

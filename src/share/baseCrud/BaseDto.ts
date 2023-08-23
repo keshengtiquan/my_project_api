@@ -6,11 +6,11 @@ export class QueryOptionsDto {
   @IsInt({ message: 'pageSize必须是数字' })
   @Type(() => Number)
   @IsOptional()
-  readonly pageSize?: number = 1;
+  readonly pageSize: number;
 
   @Min(1, { message: 'current最小值为1' })
   @IsInt({ message: 'current必须是数字' })
   @Type(() => Number)
   @IsOptional()
-  readonly pageNumber?: number = 10;
+  readonly pageNumber: number;
 } 
